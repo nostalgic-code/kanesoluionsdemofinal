@@ -39,36 +39,53 @@
       margin: 0 auto;
     }
 
+    /* Updated Card Styles */
     .reason-card {
       background-color: #f9f9f9;
       border: 1px solid #e0e0e0;
       border-radius: 16px;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 2rem;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      transition: all 0.3s ease;
+      cursor: default;
     }
 
     .reason-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 16px 28px rgba(0, 0, 0, 0.08);
+      background-color: #fff;
     }
 
     .reason-card i {
       font-size: 2.5rem;
       color: #0f4171;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .reason-card:hover i {
+      transform: scale(1.1);
     }
 
     .reason-card h3 {
       font-size: 1.4rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
       color: #0f4171;
     }
 
-    .reason-card p {
+    .reason-card .card-description {
+      display: block;
       font-size: 1rem;
+      line-height: 1.6;
+      color: #666;
+      margin-top: 1rem;
+      transition: opacity 0.3s ease;
+    }
+
+    .reason-card p {
+      font-size: 1.1rem;
       color: #333;
+      margin-bottom: 1rem;
     }
 
     .modal {
@@ -312,7 +329,7 @@
             <span class="play-text">Play Reel</span>
         </div>        <div class="page1">
             <video autoplay loop muted src="background.mov"></video>            <div class="page1-content">
-                <h1 class="showreel-text" style="font-size: 45px; color: #f15d2f;">Showreel</h1>
+                <h1 class="showreel-text" style="font-size: 45px; color: #f15d2f;"></h1>
             </div>
         </div>
 
@@ -357,38 +374,32 @@
 <section class="why-solar">
   <h2>Why Go Solar?</h2>
   <div class="reasons-grid">
-    <div class="reason-card"
-         data-title="Lower Energy Bills"
-         data-description="Solar panels significantly reduce your electricity bills by generating free energy from the sun. Over time, this leads to substantial savings and protection from rising utility costs.">
+    <div class="reason-card">
       <i class="fas fa-money-bill-wave"></i>
       <h3>Lower Energy Bills</h3>
       <p>Save up to 70% on your electricity costs.</p>
+      <div class="card-description">
+        Solar panels significantly reduce your electricity bills by generating free energy from the sun. Over time, this leads to substantial savings and protection from rising utility costs.
+      </div>
     </div>
-    <div class="reason-card"
-         data-title="Energy Independence"
-         data-description="With solar, you generate your own power, making you less dependent on load-shedding, power outages, or increasing electricity tariffs. It gives you control and peace of mind.">
+    <div class="reason-card">
       <i class="fas fa-battery-full"></i>
       <h3>Energy Independence</h3>
       <p>Reduce reliance on unreliable grid power.</p>
+      <div class="card-description">
+        With solar, you generate your own power, making you less dependent on load-shedding, power outages, or increasing electricity tariffs. It gives you control and peace of mind.
+      </div>
     </div>
-    <div class="reason-card"
-         data-title="Eco-Friendly"
-         data-description="Solar energy is clean and renewable. By switching, you're helping reduce harmful greenhouse gas emissions and contributing to a more sustainable, healthier planet.">
+    <div class="reason-card">
       <i class="fas fa-leaf"></i>
       <h3>Eco-Friendly</h3>
       <p>Decrease your carbon footprint and support a cleaner Earth.</p>
+      <div class="card-description">
+        Solar energy is clean and renewable. By switching, you're helping reduce harmful greenhouse gas emissions and contributing to a more sustainable, healthier planet.
+      </div>
     </div>
   </div>
 </section>
-
-<!-- Modal -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3 id="modal-title">Modal Title</h3>
-    <p id="modal-description">Modal description goes here.</p>
-  </div>
-</div>
 
 
 
@@ -460,7 +471,7 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="work.html">Our work</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="footer-section contact-info">
@@ -534,35 +545,7 @@
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.reason-card');
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const closeBtn = document.querySelector('.close');
 
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const title = card.getAttribute('data-title');
-        const description = card.getAttribute('data-description');
-
-        modalTitle.textContent = title;
-        modalDescription.textContent = description;
-
-        modal.style.display = 'block';
-      });
-    });
-
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  });
 </script>
 
 <script>
