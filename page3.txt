@@ -1,0 +1,14 @@
+<div class="page3">
+            <div class="page3-top">
+
+                <h4 style="color:#0f4171;">Solar Solutions <span>Gallery</span></h4>
+                <div class="underlinewaladiv">
+                    <h2 style="color:#0f4171;">Every Panel Tells a Story</h2>
+                    <h2 style="color:#0f4171;">& Watch Our Installations</h2>
+                </div>
+            </div>
+
+                      <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div class="elfsight-app-cba485a4-3509-4dd1-b07e-bb17c2550aa3" data-elfsight-app-lazy></div>
+        </div>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navbar Scroll + Custom Cursor + Video Modal</title>
+  <style>
+
+    @font-face {
+  font-family: 'Suisse Intl';
+  src: url('/static/fonts/SuisseIntl-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: Arial, sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    .main-navbar {
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: transparent;
+      color: white;
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
+
+    .main-navbar a,
+    .main-navbar .logo {
+      text-decoration: none;
+      color: inherit;
+      font-weight: bold;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .main-navbar.scrolled {
+      background: rgba(15, 65, 113, 0.9);
+      color: #0f4171;
+    }
+
+    .main-navbar.scrolled a,
+    .main-navbar.scrolled .logo {
+      color: #0f4171;
+    }
+
+    .intro-section {
+      height: 90vh;
+      background: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .intro-section h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .video-section {
+      height: 100vh;
+      position: relative;
+    }
+
+    .video-section video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      cursor: none; /* Hide default cursor so custom cursor shows */
+      border: 3px solid black; /* Black border around video */
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-align: center;
+      top: 40%;
+    }
+
+    /* Custom Cursor - Play Reel */
+    .cursor-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      color: orange;
+      z-index: 5;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s linear;
+      font-weight: bold;
+      font-size: 14px;
+      user-select: none;
+      cursor: none;
+    }
+
+    .cursor svg {
+      fill: orange;
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      cursor: none; /* hide default cursor inside modal */
+    }
+
+    .modal-video-container {
+      position: relative;
+      width: 80vw;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      background: black;
+      box-shadow: 0 0 20px rgba(255,165,0,0.7);
+      border: 3px solid black; /* Black border around modal video */
+    }
+
+    .modal-video-container video {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Custom Cursor - Close Reel */
+    .modal-cursor-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: auto; /* Allow pointer events so it can be clicked */
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white; /* White close reel text */
+      font-weight: bold;
+      font-size: 14px;
+      user-select: none;
+      cursor: pointer; /* Show pointer cursor to indicate click */
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s linear;
+      z-index: 2100;
+    }
+
+    .modal-cursor-wrapper svg {
+      fill: white; /* White icon for close reel */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="main-navbar" id="navbar">
+    <div class="logo">LOGO</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Work</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <!-- INTRO SECTION -->
+  <div class="intro-section" id="intro">
+    <h1>Create for the future.</h1>
+    <p>Innovate. Elevate. Transform.</p>
+  </div>
+
+  <!-- VIDEO SECTION -->
+  <div class="video-section" id="video-section">
+    <video autoplay muted loop>
+      <source src="background.mov" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="content">
+      <h1>SHOWREEL</h1>
+      <p>Experience the transition.</p>
+    </div>
+
+    <!-- Custom Cursor - Play Reel -->
+    <div class="cursor-wrapper" id="custom-cursor">
+      <div class="cursor">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="orange" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </div>
+      <span class="play-text">Play Reel</span>
+    </div>
+  </div>
+
+  <!-- Modal for playing video -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-video-container" id="modal-video-container">
+      <video id="modal-video" controls>
+        <source src="background.mov" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Custom Cursor - Close Reel -->
+    <div class="modal-cursor-wrapper" id="modal-cursor">
+      <div class="cursor">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M18 6 L6 18 M6 6 L18 18" stroke="white" stroke-width="2" fill="none" />
+        </svg>
+      </div>
+      <span class="close-text">Close Reel</span>
+    </div>
+  </div>
+
+  <script>
+    // Navbar scroll behavior
+    const navbar = document.getElementById("navbar");
+    const videoSection = document.getElementById("video-section");
+
+    window.addEventListener("scroll", () => {
+      const videoTop = videoSection.offsetTop;
+      if (window.scrollY >= videoTop - 80) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+    // Custom cursor logic for video section
+    const cursorWrapper = document.getElementById('custom-cursor');
+
+    videoSection.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      cursorWrapper.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    videoSection.addEventListener('mouseenter', () => {
+      cursorWrapper.style.display = 'flex';
+    });
+
+    videoSection.addEventListener('mouseleave', () => {
+      cursorWrapper.style.display = 'none';
+    });
+
+    // Modal logic
+    const modalOverlay = document.getElementById('modal-overlay');
+    const modalVideoContainer = document.getElementById('modal-video-container');
+    const modalVideo = document.getElementById('modal-video');
+    const modalCursor = document.getElementById('modal-cursor');
+
+    // Show modal when clicking anywhere in videoSection
+    videoSection.addEventListener('click', () => {
+      modalOverlay.style.display = 'flex';
+      modalVideo.play();
+      modalCursor.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // prevent background scroll
+    });
+
+    // Move modal custom cursor with mouse inside modalOverlay
+    modalOverlay.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      modalCursor.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Hide modal cursor initially, show on mouse enter modalOverlay
+    modalOverlay.addEventListener('mouseenter', () => {
+      modalCursor.style.display = 'flex';
+    });
+
+    modalOverlay.addEventListener('mouseleave', () => {
+      modalCursor.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the video container
+    modalOverlay.addEventListener('click', (e) => {
+      // If click target is modal overlay but NOT inside video container
+      if (!modalVideoContainer.contains(e.target)) {
+        closeModal();
+      }
+    });
+
+    // Prevent click inside modal video container from bubbling to overlay
+    modalVideoContainer.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Close modal on clicking Close Reel custom cursor
+    modalCursor.addEventListener('click', () => {
+      closeModal();
+    });
+
+    function closeModal() {
+      modalOverlay.style.display = 'none';
+      modalVideo.pause();
+      modalVideo.currentTime = 0;
+      document.body.style.overflow = ''; // restore scroll
+    }
+  </script>
+</body>
+</html>

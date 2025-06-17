@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Section</title>
+    <!-- Theme and FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: white;
+      color: #000;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      padding-top: 80px; /* Space for fixed navbar */
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .nav a {
+      margin: 0 0.5rem;
+      color: #ccc;
+    }
+
+    .nav a.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .talk {
+      font-size: 0.75rem;
+      color: #fff;
+    }
+
+    .hero {
+      padding-top: 120px; /* Add space below the fixed navbar */
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: #0f4171;
+      margin: 0;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4rem;
+      font-size: 1rem;
+    }
+
+    .contact .email,
+    .contact .jobs {
+      text-align: right;
+    }
+
+    .section-divider {
+      border-top: 1px solid #333;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .locations {
+      display: block;
+    }
+
+    .location {
+      margin-bottom: 3rem;
+    }
+
+    .city {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .address {
+      margin-bottom: 1rem;
+    }
+
+    .time {
+      font-family: monospace;
+      color: #ccc;
+    }
+
+
+    /* Hamburger Base */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background-color: #0f4171;
+  border-radius: 2px;
+}
+
+/* Mobile Nav */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-center {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    height: 100%;
+    background-color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5rem 2rem;
+    gap: 1.5rem;
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-center.active {
+    right: 0;
+  }
+
+  .nav-right {
+    display: none;
+  }
+
+  .nav-overlay {
+    display: none;
+  }
+
+  .nav-overlay.active {
+    display: block;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+}
+
+/* Responsive Styles */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        line-height: 1.4;
+      }
+
+      .hero h1 br {
+        display: none;
+      }
+
+      .contact {
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .contact .email,
+      .contact .jobs {
+        text-align: left;
+      }
+
+      .contact .info,
+      .contact .email,
+      .contact .jobs {
+        margin-bottom: 1rem;
+      }
+
+      .contact p {
+        margin-bottom: 0.5rem;
+      }
+
+      .location {
+        margin-bottom: 2rem;
+      }
+
+      .city {
+        font-size: 1.2rem;
+      }
+
+      .address {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .time {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Additional responsive tweaks for extra small devices */
+    @media (max-width: 480px) {
+      .hero {
+        padding-top: 80px;
+      }
+
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+
+      .container {
+        padding: 1rem;
+        padding-top: 60px;
+      }
+
+      .section-divider {
+        margin: 1.5rem 0;
+      }
+    }
+
+    /* Ensure footer is responsive */
+    @media (max-width: 768px) {
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1rem;
+      }
+
+      .footer-section {
+        text-align: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-logo {
+        height: 180px;
+        margin: 0 auto 2rem;
+      }
+    }
+
+    /* Add smooth transitions for better mobile experience */
+    .hero h1,
+    .contact,
+    .location {
+      transition: all 0.3s ease;
+    }
+
+    /* Improve touch targets for mobile */
+    @media (max-width: 768px) {
+      .contact a,
+      .social-links a,
+      .footer-section a {
+        padding: 0.5rem 0;
+        display: inline-block;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 1rem;
+      }
+    }
+
+    /* Ensure navbar doesn't overlap content */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-content {
+      padding-top: 80px; /* Height of navbar */
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Ensure all content is visible */
+    body {
+      min-height: 100vh;
+      position: relative;
+      padding-bottom: 60px; /* Space for footer */
+    }
+  </style>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+   <nav class="navbar">
+  <div class="nav-left">
+    <a href="index.html">
+      <img src="logo-1-removebg-preview.png" alt="KaneSolutions Logo" class="logo-image">
+    </a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html">Home</a>
+    <a href="work.html">Our Work</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+  <div class="nav-right">
+    <a href="mailto:info@kanesolutions.co.za" class="lets-talk">Let's Talk</a>
+  </div>
+  <!-- Hamburger -->
+  <button class="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+    
+  <div class="nav-overlay"></div>
+  <div class="main-content">
+    <div class="container">
+      <main class="hero">
+        <h1>
+          Partnering with businesses, communities, <br>
+          and visionaries to deliver solar solutions <br>
+          that power sustainable growth and lasting environmental impact.
+        </h1>
+      </main>
+
+    <section class="contact">
+      <div class="info">
+        <p>Get in touch</p>
+      </div>
+      <div class="email">
+        <p>New Business.</p>
+        <a href="mailto:info@kanesolutions.co.za" style="color:#000;">info@kanesolutions.co.za</a>
+      </div>
+      <div class="jobs">
+        <p>Join the Team.</p>
+        <a href="mailto:info@kanesolutions.co.za" style="color:#000;">info@kanesolutions.co.za</a>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="locations">
+      <div class="location">
+        <p class="city">Johannesburg</p>
+        <p class="address">
+          Unit B4, Boundary Office Park,<br>
+          11 Boundary Lane,<br>
+          Oakdene, Johannesburg, 7580<br>
+          South Africa
+        </p>
+        <p class="time" id="time-jhb"></p>
+      </div>
+    </section>
+  </div>
+     
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-section company-info">
+                    <img src="Kane Solutions-03.png" alt="KaneSolutions Logo" class="footer-logo">
+                    <p>Empowering communities through sustainable solar solutions.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/ForOurCommunities/?_ga=2.205317072.1744652362.1749544928-93513310.1748967560"><i class="fab fa-facebook"></i></a>
+                        <a href="https://twitter.com/kanesolutions?_ga=2.226331994.1744652362.1749544928-93513310.1748967560"><i class="fab fa-twitter"></i></a>
+                        <a href="https://g.page/KSForCommunities?gm&_ga=2.226331994.1744652362.1749544928-93513310.1748967560"><i class="fab fa-google"></i></a>
+                        <a href="https://www.instagram.com/for.communities/?hl=en&_ga=2.226331994.1744652362.1749544928-93513310.1748967560"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section quick-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="work.html">Our work</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact-info">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Unit B4, Boundary Office Park, 
+                            11 Boundary Lane, Oakdene, 
+                            Johannesburg, 7580</li>
+                        <li>
+                          <a href="tel:+27736143163">
+                            <i class="fas fa-phone"></i> +27 73 614 3163
+                          </a>
+                        </li>
+                        <li>
+                          <a href="tel:+27116755265">
+                            <i class="fas fa-phone"></i> +27 11 675 5265
+                          </a>
+                        </li>
+                        <li>
+                          <a href="mailto:info@kanesolutions.co.za">
+                            <i class="fas fa-envelope"></i> info@kanesolutions.co.za
+                          </a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 KaneSolutions®. All rights reserved.</p>
+            </div>
+        </footer>
+    
+ 
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="script.js"></script>
+
+  <script>
+    function updateTime() {
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      };
+
+      const timeJHB = new Intl.DateTimeFormat('en-US', {
+        ...options,
+        timeZone: 'Africa/Johannesburg'
+      }).format(new Date());
+
+      document.getElementById('time-jhb').textContent = timeJHB;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+  </script>
+
+
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('.nav-center');
+  const overlay = document.querySelector('.nav-overlay');
+
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+  });
+
+  overlay.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+</script>
+</body>
+</html>

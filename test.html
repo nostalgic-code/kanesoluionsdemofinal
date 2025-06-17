@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Hamburger Menu</title>
+  <style>
+    body { font-family: Arial; margin: 0; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #eee;
+      padding: 1rem;
+    }
+
+    .nav-center {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background: white;
+      width: 100%;
+      padding: 1rem;
+    }
+
+    .nav-center.active {
+      display: flex;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: black;
+    }
+
+    @media(min-width: 768px) {
+      .nav-center {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+      }
+
+      .hamburger {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-left">Logo</div>
+    <div class="nav-center" id="nav-center">
+      <a href="https://www.google.com">Google</a>
+      <a href="https://www.yahoo.com">Yahoo</a>
+    </div>
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const nav = document.getElementById('nav-center');
+
+      hamburger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+      });
+
+      document.querySelectorAll('.nav-center a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('active');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
